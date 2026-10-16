@@ -1,26 +1,107 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Design tokens. One neutral scale + one accent. Change here, not in components. */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg: #ffffff;
+  --bg-subtle: #f7f7f8;
+  --fg: #111113;
+  --fg-muted: #5c5c66;
+  --fg-faint: #8e8e98;
+  --border: #e6e6ea;
+  --border-strong: #d4d4da;
+  --accent: #2753d9;
+  --accent-fg: #ffffff;
+  --danger: #c4312d;
+  --ok: #1f7a4d;
+}
+
+.dark {
+  --bg: #0c0c0e;
+  --bg-subtle: #151518;
+  --fg: #ededf0;
+  --fg-muted: #a0a0aa;
+  --fg-faint: #6e6e78;
+  --border: #232328;
+  --border-strong: #33333a;
+  --accent: #7c9cff;
+  --accent-fg: #0c0c0e;
+  --danger: #f0716c;
+  --ok: #4cc28a;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-bg: var(--bg);
+  --color-bg-subtle: var(--bg-subtle);
+  --color-fg: var(--fg);
+  --color-fg-muted: var(--fg-muted);
+  --color-fg-faint: var(--fg-faint);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-accent: var(--accent);
+  --color-accent-fg: var(--accent-fg);
+  --color-danger: var(--danger);
+  --color-ok: var(--ok);
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  color-scheme: light;
+}
+html.dark {
+  color-scheme: dark;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+  font-feature-settings: "ss01", "cv11";
+}
+
+::selection {
+  background: color-mix(in srgb, var(--accent) 22%, transparent);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Markdown content */
+.prose {
+  --tw-prose-body: var(--fg-muted);
+  --tw-prose-headings: var(--fg);
+  --tw-prose-bold: var(--fg);
+  --tw-prose-links: var(--fg);
+  --tw-prose-bullets: var(--fg-faint);
+  --tw-prose-counters: var(--fg-faint);
+  --tw-prose-quotes: var(--fg);
+  --tw-prose-quote-borders: var(--border-strong);
+  --tw-prose-code: var(--fg);
+  --tw-prose-pre-bg: var(--bg-subtle);
+  --tw-prose-pre-code: var(--fg);
+  --tw-prose-hr: var(--border);
+  --tw-prose-th-borders: var(--border-strong);
+  --tw-prose-td-borders: var(--border);
+}
+.prose a {
+  text-decoration-color: var(--border-strong);
+  text-underline-offset: 3px;
+}
+.prose a:hover {
+  text-decoration-color: var(--fg);
+}
+.prose pre {
+  border: 1px solid var(--border);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
 }
