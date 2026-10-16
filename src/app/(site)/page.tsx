@@ -45,15 +45,9 @@ export default async function HomePage() {
         )}
         <div className="mt-8 flex flex-wrap gap-3">
           <ButtonLink href="/projects">View work</ButtonLink>
-          {settings.resumeUrl ? (
-            <ButtonLink href={settings.resumeUrl} variant="secondary" external>
-              Résumé
-            </ButtonLink>
-          ) : (
-            <ButtonLink href="/contact" variant="secondary">
-              Get in touch
-            </ButtonLink>
-          )}
+          <ButtonLink href="/resume" variant="secondary" data-umami-event="resume-open">
+            Résumé
+          </ButtonLink>
         </div>
       </Container>
 

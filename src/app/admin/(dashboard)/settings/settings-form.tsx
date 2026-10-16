@@ -4,6 +4,7 @@ import type { Settings } from "@/lib/types";
 import { ActionForm, SubmitButton } from "@/components/admin/action-form";
 import { FormSection, TextArea, TextField } from "@/components/admin/fields";
 import { FileUrlField, ImageField } from "@/components/admin/image-field";
+import { MarkdownEditor } from "@/components/admin/markdown-editor";
 import { RowsField } from "@/components/admin/rows-field";
 import type { ActionResult } from "../actions";
 
@@ -35,8 +36,8 @@ export function SettingsForm({
 
       <FormSection title="About">
         <TextArea label="Intro" name="intro" rows={3} maxLength={400} defaultValue={s?.intro} hint="One or two sentences for the home page." />
-        <TextArea label="Bio" name="bio" rows={10} className="font-mono" defaultValue={s?.bio} hint="Markdown, shown on the About page." />
-        <FileUrlField label="Résumé" name="resumeUrl" initial={s?.resumeUrl ?? ""} hint="PDF link. Leave empty to hide résumé buttons." />
+        <MarkdownEditor label="Bio" name="bio" rows={10} initial={s?.bio ?? ""} hint="Markdown, shown on the About page." />
+        <FileUrlField label="Résumé" name="resumeUrl" initial={s?.resumeUrl ?? ""} hint="Optional PDF, offered as “Download PDF” on the /resume page." />
       </FormSection>
 
       <FormSection title="Links">

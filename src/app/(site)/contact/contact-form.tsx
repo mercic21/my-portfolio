@@ -50,7 +50,7 @@ export function ContactForm() {
         </p>
       )}
 
-      <button type="submit" disabled={pending} className={buttonStyles.primary}>
+      <button type="submit" disabled={pending} className={buttonStyles.primary} data-umami-event="contact-submit">
         {pending ? "Sending…" : "Send message"}
       </button>
     </form>

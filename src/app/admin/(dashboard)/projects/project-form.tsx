@@ -5,7 +5,9 @@ import type { Project } from "@/lib/types";
 import { slugify } from "@/lib/utils";
 import { ActionForm, SubmitButton } from "@/components/admin/action-form";
 import { Checkbox, FormSection, Select, TextArea, TextField } from "@/components/admin/fields";
+import { GalleryField } from "@/components/admin/gallery-field";
 import { ImageField } from "@/components/admin/image-field";
+import { MarkdownEditor } from "@/components/admin/markdown-editor";
 import { RowsField } from "@/components/admin/rows-field";
 import type { ActionResult } from "../actions";
 
@@ -75,13 +77,7 @@ export function ProjectForm({
       </FormSection>
 
       <FormSection title="Case study" description="Markdown. Structure it as problem → approach → outcome.">
-        <TextArea
-          label="Content"
-          name="content"
-          rows={18}
-          className="font-mono"
-          defaultValue={project ? project.content : CASE_STUDY_TEMPLATE}
-        />
+        <MarkdownEditor label="Content" name="content" rows={18} initial={project ? project.content : CASE_STUDY_TEMPLATE} />
         <RowsField
           label="Key results"
           name="metrics"
@@ -97,17 +93,7 @@ export function ProjectForm({
 
       <FormSection title="Images">
         <ImageField label="Cover" name="cover" initial={project?.cover ?? null} />
-        <RowsField
-          label="Gallery"
-          name="images"
-          columns={[
-            { name: "url", placeholder: "Image URL" },
-            { name: "alt", placeholder: "Caption / alt text" },
-          ]}
-          initial={project?.images ?? []}
-          addLabel="Add image"
-          max={20}
-        />
+        <GalleryField label="Gallery" name="images" initial={project?.images ?? []} />
       </FormSection>
 
       <FormSection title="Publishing">

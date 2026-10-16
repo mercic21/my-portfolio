@@ -27,11 +27,9 @@ export default async function AboutPage() {
             settings.intro && <p className="mt-8 max-w-2xl text-fg-muted">{settings.intro}</p>
           )}
           <div className="mt-8 flex flex-wrap gap-3">
-            {settings.resumeUrl && (
-              <ButtonLink href={settings.resumeUrl} external>
-                Download résumé
-              </ButtonLink>
-            )}
+            <ButtonLink href="/resume" data-umami-event="resume-open">
+              Résumé
+            </ButtonLink>
             <ButtonLink href="/contact" variant="secondary">
               Contact
             </ButtonLink>

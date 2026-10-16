@@ -99,6 +99,25 @@ body {
   border: 1px solid var(--border);
 }
 
+/* Print always uses the light palette (résumé page) */
+@media print {
+  :root,
+  .dark {
+    --bg: #ffffff;
+    --bg-subtle: #f7f7f8;
+    --fg: #111113;
+    --fg-muted: #3f3f46;
+    --fg-faint: #6b6b75;
+    --border: #e4e4e7;
+    --border-strong: #d4d4d8;
+    color-scheme: light;
+  }
+  @page {
+    size: A4;
+    margin: 14mm 16mm;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   * {
     transition: none !important;

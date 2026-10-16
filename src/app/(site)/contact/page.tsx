@@ -24,7 +24,7 @@ export default async function ContactPage() {
               <div>
                 <dt className="text-fg-faint">Email</dt>
                 <dd className="mt-1">
-                  <a href={`mailto:${settings.email}`} className="hover:underline">
+                  <a href={`mailto:${settings.email}`} className="hover:underline" data-umami-event="email-click">
                     {settings.email}
                   </a>
                 </dd>

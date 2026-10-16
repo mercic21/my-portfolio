@@ -22,9 +22,13 @@ export default async function EditProject({ params }: PageProps<"/admin/projects
         back={{ href: "/admin/projects", label: "Projects" }}
         actions={
           <>
-            {project.status === "published" && (
+            {project.status === "published" ? (
               <Link href={`/projects/${project.slug}`} target="_blank" className={buttonStyles.ghost}>
                 View ↗
+              </Link>
+            ) : (
+              <Link href={`/admin/preview/${project.id}`} target="_blank" className={buttonStyles.ghost}>
+                Preview ↗
               </Link>
             )}
             <ConfirmButton action={deleteProject.bind(null, project.id)} confirmText={`Delete "${project.title}"? This can't be undone.`}>

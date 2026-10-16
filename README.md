@@ -27,13 +27,14 @@ Open http://localhost:3000 and http://localhost:3000/admin.
 | `AUTH_DEV_LOGIN` | no | `true` shows a one-click login on `/admin/login`, only under `next dev`. |
 | `NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME`, `CLOUDINARY_API_KEY`, `CLOUDINARY_API_SECRET` | no | Enables upload buttons. Without them, paste image URLs. For résumé PDFs, enable *Allow delivery of PDF and ZIP files* in Cloudinary security settings. |
 | `RESEND_API_KEY`, `CONTACT_NOTIFY_TO`, `CONTACT_NOTIFY_FROM` | no | Email notification for new contact messages. |
+| `NEXT_PUBLIC_UMAMI_WEBSITE_ID` | no | Umami analytics. Loads only in production and only counts the `NEXT_PUBLIC_SITE_URL` domain. Set `NEXT_PUBLIC_UMAMI_SRC` if you self-host Umami. |
 
 ## How it fits together
 
 ```
 src/
   app/
-    (site)/           public pages: home, projects, projects/[slug], about, contact
+    (site)/           public pages: home, projects, projects/[slug], about, resume, contact
     admin/login/      sign in
     admin/(dashboard)/ protected CRUD + server actions (actions.ts)
     api/              auth, signed uploads, JSON export
@@ -50,6 +51,10 @@ scripts/seed.ts
 
 - **Freshness:** public reads are tagged (`settings`, `projects`, `experience`, `skills`). Every admin save calls `updateTag()`, so the next request renders fresh content.
 - **Security:** every admin page, data read, server action and API route checks the session on the server. Input is validated with Zod; Markdown renders without raw HTML. The contact form has a honeypot and a per-IP rate limit (IPs are stored only as salted hashes).
+- **Résumé:** `/resume` is built from Settings, Experience, Skills and featured projects, and prints cleanly to A4 (*Print / save as PDF*). An uploaded PDF is optional.
+- **Analytics events:** clicks on elements with `data-umami-event` are tracked: `resume-open`, `resume-print`, `resume-pdf`, `project-live`, `project-repo`, `contact-submit`, `email-click`, `social`.
+- **Share images:** each case study gets a generated Open Graph image (`projects/[slug]/opengraph-image.tsx`).
+- **Drafts:** unpublished projects can be previewed at `/admin/preview/<id>` (admin only).
 - **Backups:** *Admin → Overview → Export JSON* downloads all content.
 
 ## Deploy (Vercel)
